@@ -16,7 +16,7 @@ import com.vaadin.flow.router.Route;
 import java.util.List;
 
 @Route(value="events", layout = MainLayout.class)
-@PageTitle("MeetMe All Events")
+@PageTitle("Safari all reservation")
 public class EventsView extends Composite {
     VerticalLayout layout = new VerticalLayout();
     Grid<Event> grid = new Grid<>(Event.class,false);

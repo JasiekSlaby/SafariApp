@@ -18,7 +18,7 @@ import com.vaadin.flow.router.Route;
 
 import java.time.Duration;
 
-@PageTitle("MeetMe create event")
+@PageTitle("Safari create reservation")
 @Route(value="add", layout = MainLayout.class)
 public class AddView extends Composite {
 

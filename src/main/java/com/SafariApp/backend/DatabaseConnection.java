@@ -15,8 +15,8 @@ public class DatabaseConnection {
         try
         {
             // create a mysql database connection
-            String myUrl = "jdbc:mysql://localhost:3306/MeetMe?useSSL=false";
-            Connection conn = DriverManager.getConnection(myUrl, "root", "qwerty123");
+            String myUrl = "jdbc:mysql://mysql.agh.edu.pl:3306/jslaby?useSSL=false";
+            Connection conn = DriverManager.getConnection(myUrl, "jslaby", "FenddnhA7zhry6X2");
 
             // the mysql insert statement
             String query = "INSERT INTO event(title,date,location,description) "
@@ -45,8 +45,8 @@ public class DatabaseConnection {
 
         try {
             // create a mysql database connection
-            String myUrl = "jdbc:mysql://localhost:3306/MeetMe?useSSL=false";
-            Connection conn = DriverManager.getConnection(myUrl, "root", "qwerty123");
+            String myUrl = "jdbc:mysql://mysql.agh.edu.pl:3306/jslaby?useSSL=false";
+            Connection conn = DriverManager.getConnection(myUrl, "jslaby", "FenddnhA7zhry6X2");
 
             // SQL command data stored in String datatype
             String sql = "select * from event";

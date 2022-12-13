@@ -9,13 +9,13 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route(value="", layout = MainLayout.class)
-@PageTitle("MeetMe Home")
+@PageTitle("Safari Home")
 public class HomeView extends Composite {
     VerticalLayout layout = new VerticalLayout();
 
     protected Component initContent(){
         layout.add(
-                new H2("Click, meet and have fun!")
+                new H2("Get reservation and have fun on Safari!")
         );
 
         layout.setAlignItems(FlexComponent.Alignment.CENTER);

@@ -14,7 +14,7 @@ public class MainLayout extends AppLayout {
     private final VerticalLayout root = new VerticalLayout();
 
     public MainLayout() {
-        H1 title = new H1("MeetMe!");
+        H1 title = new H1("SafariApp!");
         title.getStyle()
                 .set("font-size", "var(--lumo-font-size-l)")
                 .set("left", "var(--lumo-space-l)")
@@ -45,11 +45,11 @@ public class MainLayout extends AppLayout {
 
     private Tabs getTabs() {
         Tab events = new Tab(VaadinIcon.USERS.create());
-        RouterLink home_link = new RouterLink("Events", EventsView.class);
+        RouterLink home_link = new RouterLink("Reservations", EventsView.class);
         events.add(home_link);
 
         Tab addEvent = new Tab(VaadinIcon.PLUS.create());
-        RouterLink add_link = new RouterLink("Add new event", AddView.class);
+        RouterLink add_link = new RouterLink("Add new reservation", AddView.class);
         addEvent.add(add_link);
 
         Tab login = new Tab(VaadinIcon.SHARE.create());
