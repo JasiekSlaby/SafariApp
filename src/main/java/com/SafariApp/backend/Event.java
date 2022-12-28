@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @Component
 public class Event {
-    private String title;
+    private String safariType;
     private String date;
     private String location;
     private String description;

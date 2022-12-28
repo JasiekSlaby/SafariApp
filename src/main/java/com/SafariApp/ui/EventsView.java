@@ -2,6 +2,7 @@ package com.SafariApp.ui;
 
 import com.SafariApp.backend.DatabaseConnection;
 import com.SafariApp.backend.Event;
+import com.SafariApp.backend.Guide;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
@@ -24,7 +25,7 @@ public class EventsView extends Composite {
     protected Component initContent(){
         configureGrid();
         layout.add(
-                new H2("Events"),
+                new H2("Reservations"),
                 grid
         );
 
@@ -34,9 +35,10 @@ public class EventsView extends Composite {
     }
 
     private void configureGrid() {
-        grid.addColumn(Event::getTitle).setHeader("Title").setTextAlign(ColumnTextAlign.CENTER);
+        grid.addColumn(Event::getSafariType).setHeader("Title").setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(Event::getDate).setHeader("Date").setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(Event::getLocation).setHeader("Location").setTextAlign(ColumnTextAlign.CENTER);
+//        grid.addColumn(Guide::getName).setHeader("Guide Name").setTextAlign(ColumnTextAlign.CENTER);
         grid.setItemDetailsRenderer(createPersonDetailsRenderer());
         grid.setAllRowsVisible(true);
         //grid.setWidth("80%");
