@@ -2,7 +2,7 @@ package com.SafariApp.ui;
 
 import com.SafariApp.backend.DatabaseConnection;
 import com.SafariApp.backend.Event;
-import com.SafariApp.backend.Guide;
+import com.SafariApp.backend.Client;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
@@ -22,6 +22,8 @@ public class EventsView extends Composite {
     VerticalLayout layout = new VerticalLayout();
     Grid<Event> grid = new Grid<>(Event.class,false);
 
+    Grid<Client> gridClient = new Grid<>(Client.class,false);
+
     protected Component initContent(){
         configureGrid();
         layout.add(
@@ -40,8 +42,9 @@ public class EventsView extends Composite {
         grid.addColumn(Event::getLocation).setHeader("Location").setTextAlign(ColumnTextAlign.CENTER);
 //        grid.addColumn(Guide::getName).setHeader("Guide Name").setTextAlign(ColumnTextAlign.CENTER);
         grid.setItemDetailsRenderer(createPersonDetailsRenderer());
+        gridClient.setItemDetailsRenderer(createPersonDetailsRendererClient());
         grid.setAllRowsVisible(true);
-        //grid.setWidth("80%");
+        grid.setWidth("80%");
 
         DatabaseConnection databaseConnection = new DatabaseConnection();
         List<Event> people = databaseConnection.getEvents();
@@ -52,5 +55,10 @@ public class EventsView extends Composite {
     private static ComponentRenderer<EventDetailsFormLayout, Event> createPersonDetailsRenderer() {
         return new ComponentRenderer<>(EventDetailsFormLayout::new,
                 EventDetailsFormLayout::setEvent);
+    }
+
+    private static ComponentRenderer<EventDetailsFormLayout, Client> createPersonDetailsRendererClient() {
+        return new ComponentRenderer<>(EventDetailsFormLayout::new,
+                EventDetailsFormLayout::setClient);
     }
 }

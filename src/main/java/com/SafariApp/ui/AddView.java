@@ -1,41 +1,36 @@
 package com.SafariApp.ui;
 
-import com.SafariApp.backend.DatabaseConnection;
-import com.SafariApp.backend.Event;
-import com.SafariApp.backend.Guide;
+import com.SafariApp.backend.*;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-
-import javax.xml.crypto.Data;
 import java.time.Duration;
-import java.util.List;
-import java.util.stream.Stream;
 
 @PageTitle("Safari create reservation")
 @Route(value="add", layout = MainLayout.class)
 public class AddView extends Composite {
 
     protected Component initContent() {
-        TextField safariType = new TextField("SafariType");//ComboBox<String> safariType = new ComboBox<>("Safarii type");
-//        safariType.setItems(DatabaseConnection.getSafari());
+//        ComboBox<String> safariType = new ComboBox<>("Safarii type");//        TextField safariType = new TextField("SafariType");
+//        safariType.setItems(String.valueOf(DatabaseConnection.getSafari()));
 //        safariType.setItemLabelGenerator(Safari::getName);
+        ComboBox<Safari> safariType = new ComboBox<>("Safari type");
+        ListDataProvider<Safari> dataProvider = DataProvider.ofCollection(DatabaseConnection.getSafari());
+        safariType.setDataProvider(dataProvider);
         safariType.setWidth("25%");
         safariType.setRequired(true);
         safariType.setMinHeight("15px");
@@ -80,8 +75,10 @@ public class AddView extends Composite {
         clientEmail.setPlaceholder("username@example.com");
 
 
-        ComboBox<String> guideComboBox = new ComboBox<>("Guide");
-        guideComboBox.setItems(String.valueOf(DatabaseConnection.getGuides()));
+        ComboBox<Guide> guideComboBox = new ComboBox<>("Guide");
+        ListDataProvider<Guide> dataProviderGuide = DataProvider.ofCollection(DatabaseConnection.getGuide());
+        guideComboBox.setDataProvider(dataProviderGuide);
+//        guideComboBox.setItems(String.valueOf(DatabaseConnection.getGuides()));
 //        guideComboBox.setItemLabelGenerator(Guide::getName);
         guideComboBox.setAllowCustomValue(true);
         guideComboBox.setWidth("25%");
@@ -90,15 +87,18 @@ public class AddView extends Composite {
 
         Button createButton = new Button("Create",buttonClickEvent -> {
             try {
-                Event event = new Event(description.getValue(), safariType.getValue(), dateTimePicker.getValue().toString(), localization.getValue());
+                Event event = new Event(safariType.getValue().toString(), dateTimePicker.getValue().toString(), localization.getValue(), description.getValue());
+                Client client = new Client(clientName.getValue(), clientSurname.getValue(), clientPhone.getValue(), clientEmail.getValue());
                 if(event.isActual()) {
                     DatabaseConnection databaseConnection = new DatabaseConnection();
                     databaseConnection.addToDB(event);
+                    databaseConnection.addToDBClient(client);
                     Notification notificationCreate = Notification.show("Event created!", 5000, Notification.Position.BOTTOM_CENTER);
                     notificationCreate.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
                 }
                 else {
                     throw new Exception();
+
                 }
             }
             catch (Exception e) {
@@ -107,7 +107,7 @@ public class AddView extends Composite {
             }
 
             description.setValue("");
-            safariType.setValue("");
+            safariType.setValue(null);
             dateTimePicker.setValue(null);
             localization.setValue("");
 
@@ -120,12 +120,12 @@ public class AddView extends Composite {
                 safariType,
                 dateTimePicker,
                 localization,
-                new H3("Enter data about you!"),
+                new H2("Enter data about you!"),
                 clientName,
                 clientSurname,
                 clientPhone,
                 clientEmail,
-                new H4("Choose your guide!"),
+                new H2("Choose your guide!"),
                 guideComboBox,
                 createButton
         );
