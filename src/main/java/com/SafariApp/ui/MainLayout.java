@@ -56,6 +56,10 @@ public class MainLayout extends AppLayout {
         RouterLink login_link = new RouterLink("Sign In", LoginView.class);
         login.add(login_link);
 
+        Tab reserved = new Tab(VaadinIcon.BOOKMARK.create());
+        RouterLink reserved_link = new RouterLink("Reserved", ReservedView.class);
+        reserved.add(reserved_link);
+
         Tab profile = new Tab(
                 VaadinIcon.USER.create(),
                 new Span("Profile")
@@ -72,7 +76,7 @@ public class MainLayout extends AppLayout {
         profile.setEnabled(false);
         logout.setEnabled(false);
 
-        Tabs tabs = new Tabs(events,addEvent,login,profile,settings,logout);
+        Tabs tabs = new Tabs(events,addEvent,reserved,login,profile,settings,logout);
         //tabs.setOrientation(Tabs.Orientation.VERTICAL);
         tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
         return tabs;

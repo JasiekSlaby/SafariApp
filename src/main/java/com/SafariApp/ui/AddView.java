@@ -75,12 +75,11 @@ public class AddView extends Composite {
         clientEmail.setPlaceholder("username@example.com");
 
 
-        ComboBox<Guide> guideComboBox = new ComboBox<>("Guide");
-        ListDataProvider<Guide> dataProviderGuide = DataProvider.ofCollection(DatabaseConnection.getGuide());
-        guideComboBox.setDataProvider(dataProviderGuide);
-//        guideComboBox.setItems(String.valueOf(DatabaseConnection.getGuides()));
-//        guideComboBox.setItemLabelGenerator(Guide::getName);
-        guideComboBox.setAllowCustomValue(true);
+//        ComboBox<Guide> guideComboBox = new ComboBox<>("Guide");
+//        ListDataProvider<Guide> dataProviderGuide = DataProvider.ofCollection(DatabaseConnection.getGuide());
+//        guideComboBox.setDataProvider(dataProviderGuide);
+        TextField guideComboBox = new TextField("Guide");
+//        guideComboBox.setAllowCustomValue(true);
         guideComboBox.setWidth("25%");
         guideComboBox.setRequiredIndicatorVisible(true);
         guideComboBox.setMinHeight("15px");
@@ -110,6 +109,11 @@ public class AddView extends Composite {
             safariType.setValue(null);
             dateTimePicker.setValue(null);
             localization.setValue("");
+            clientName.setValue("");
+            clientSurname.setValue("");
+            clientPhone.setValue("");
+            clientEmail.setValue("");
+            guideComboBox.setValue("");
 
         });
         createButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);

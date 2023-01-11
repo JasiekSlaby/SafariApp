@@ -17,6 +17,7 @@ public class Event {
     private String date;
     private String location;
     private String description;
+//    private Integer id;
 
     public boolean isActual(){
         // Date to check
